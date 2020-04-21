@@ -1,0 +1,89 @@
+<div ng-if="ctrl.dataWarnings" style="margin-bottom:20px;">
+  <div ng-repeat="warn in ctrl.dataWarnings" style="margin-bottom:3px; padding:5px; border:1px solid red;">
+    {{warn}}
+  </div>
+</div>
+
+<div class="edit-tab-with-sidemenu">
+  <aside class="edit-sidemenu-aside" style="min-width: 100px">
+    <ul class="edit-sidemenu">
+      <li
+        ng-repeat="trace in ctrl.traces"
+        ng-class="{ active: ctrl.editor.traceIndex === $index }"
+      >
+        <a ng-click="ctrl.editor.selectTrace( $index )">{{ trace.name }}</a>
+      </li>
+      <li>
+        <!-- TODO: Better move style to CSS file -->
+        <button
+          class="btn btn-success" ng-click="ctrl.editor.createTrace();"
+          style="margin-bottom: 5px; width: 100%"
+        >
+          <i class="fa fa-plus"/> Add new
+        </button>
+      </li>
+      <li>
+        <button
+          class="btn btn-danger" ng-click="ctrl.editor.removeCurrentTrace();"
+          ng-if="ctrl.traces.length > 1"
+          style="width: 100%"
+        >
+          <i class="fa fa-trash"/> Delete
+        </button>
+      </li>
+    </ul>
+  </aside>
+
+  <div class="edit-tab-content">
+
+    <div class="section gf-form-group">
+      <h5 class="section-heading">Trace</h5>
+      <div class="section gf-form-group gf-form-inline">
+        <div class="gf-form">
+          <label class="gf-form-label width-7">Name</label>
+          <input
+            class="gf-form-input width-8"
+            ng-model="ctrl.editor.traces[ctrl.editor.traceIndex].name" 
+            ng-blur="ctrl.onConfigChanged();"
+          />
+        </div>
+      </div>
+
+      <h5 class="section-heading">Metrics</h5>
+      <div class="section gf-form-group">
+        <div class="gf-form"  
+          ng-repeat="(key, segment) in ctrl.editor.mapping">
+          <label class="gf-form-label width-7">{{key}}</label>
+          <metric-segment 
+            segment="segment" 
+            get-options="ctrl.editor.getSeriesSegs()" 
+            on-change="ctrl.editor.onSeriesChanged(key, segment)">
+          </metric-segment>
+          <a ng-click="ctrl.editor.removeMapping(key)" class="btn btn-danger btn-small" style="height: 35px;">
+            <i class="fa fa-remove"></i>
+          </a>
+        </div>
+        <div class="gf-form">
+          <input
+            class="gf-form-input width-13"
+            ng-model="ctrl.editor.addMappingInput"
+          />
+          <a ng-click="ctrl.editor.addMapping()" class="btn btn-success btn-small" style="height: 35px;">
+            <i class="fa fa-plus"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="section gf-form-group">
+      <h5 class="section-heading">Trace</h5>
+      <div class="gf-form">
+        <textarea class="gf-form-input width-30" 
+          rows="20"
+          placeholder="Layout"
+          ng-model="ctrl.editor.trace" 
+          ng-change="ctrl.onConfigChanged();"></textarea>
+      </div>
+    </div>
+  </div>
+</div>

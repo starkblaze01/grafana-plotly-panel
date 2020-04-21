@@ -1,0 +1,29 @@
+{
+  "type": "panel",
+  "name": "Plotly (Advanced)",
+  "id": "grafana-plotly-panel",
+
+  "info": {
+    "description": "Plotly Panel for Grafana",
+    "author": {
+      "name": "Kamal Galrani"
+    },
+    "keywords": ["plotly", "panel"],
+    "logos": {
+      "small": "img/plotly_logo.svg",
+      "large": "img/plotly_logo.svg"
+    },
+    "links": [
+      {"name": "Plot.ly", "url": "https://plot.ly/javascript/"},
+      {"name": "Project Page", "url": "https://github.com/tvarit-foggy/grafana-plotly-panel"},
+      {"name": "Tvarit AI", "url": "https://tvarit.com/"}
+    ],
+    "version": "%VERSION%",
+    "updated": "%TODAY%"
+  },
+
+  "dependencies": {
+    "grafanaVersion": "4.x.x",
+    "plugins": []
+  }
+}
