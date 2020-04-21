@@ -28,8 +28,15 @@ class PlotlyPanelCtrl extends MetricsPanelCtrl {
     pconfig: {
       loadFromCDN: false,
       traces: [{}],
-      options: {},
       layout: {},
+      options: {
+        displayModeBar: false,
+        displaylogo: false,
+        modeBarButtonsToRemove: [
+          'sendDataToCloud',
+        ],
+        showLink: false,
+      },
     },
   };
 
