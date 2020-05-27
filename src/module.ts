@@ -142,7 +142,9 @@ class PlotlyPanelCtrl extends MetricsPanelCtrl {
     }
 
     if (this.graphDiv && this.initialized && Plotly) {
-      Plotly.redraw(this.graphDiv);
+      Plotly.redraw(this.graphDiv).then(() => {
+        this.renderingCompleted();
+      });
     }
   }
 
@@ -299,13 +301,13 @@ class PlotlyPanelCtrl extends MetricsPanelCtrl {
     const hchanged = this.seriesHash !== seriesHash;
     if (hchanged && this.editor) {
       this.editor.selectTrace(this.editor.traceIndex);
-      this.onConfigChanged();
     }
 
     if (hchanged || !this.initialized) {
-      this.onConfigChanged();
       this.seriesHash = seriesHash;
     }
+
+    this.onConfigChanged();
   }
 
   __addCopyPath(trace: any, key: string, path: string) {
